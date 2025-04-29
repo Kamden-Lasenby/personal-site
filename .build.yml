@@ -1,0 +1,19 @@
+image: alpine/edge
+packages:
+  - hut
+  - zola
+oauth: pages.sr.ht/PAGES:RW
+environment:
+  site: kamdenlasenby.net
+sources:
+  - https://git.sr.ht/~fabianmv/posixlycorrect.com
+tasks:
+  - build: |
+      cd posixlycorrect.com
+      mkdir -p templates
+      zola build
+  - package: |
+      cd posixlycorrect.com
+      tar -C public -cvz . > ../site.tar.gz
+  - upload: |
+      hut pages publish -d $site site.tar.gz
