@@ -6,14 +6,13 @@ oauth: pages.sr.ht/PAGES:RW
 environment:
   site: kamdenlasenby.net
 sources:
-  - https://git.sr.ht/~fabianmv/posixlycorrect.com
+  - https://github.com/Kamden-Lasenby/personal-site
 tasks:
   - build: |
-      cd posixlycorrect.com
-      mkdir -p templates
+      cd personal-site
       zola build
   - package: |
-      cd posixlycorrect.com
+      cd kamdenlasenby
       tar -C public -cvz . > ../site.tar.gz
   - upload: |
       hut pages publish -d $site site.tar.gz
